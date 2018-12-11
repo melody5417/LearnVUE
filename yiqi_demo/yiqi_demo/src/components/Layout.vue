@@ -15,7 +15,11 @@
       </div>
       
     </div>
-    <div class="container">content</div>
+    <div class="container">
+      <keep-alive>
+        <router-view></router-view>
+      </keep-alive>
+    </div>
     <div class="app-foot">
       <p>@ 2018 melody5417 MIT</p>
     </div>
@@ -106,9 +110,6 @@ body {
 }
 .button:hover {
   background: #4fc08d;
-}
-.g-form {
-
 }
 .g-form-line {
   padding: 15px 0;
