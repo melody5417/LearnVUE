@@ -3,11 +3,10 @@
     <div class="index-left">
       <div class="index-left-block">
         <h2>全部产品</h2>
-
         <template v-for="product in productList">
-          <h3>{{ product.title }}</h3>
-          <ul>
-            <li v-for="item in product.list">
+          <h3 :key="product.id">{{ product.title }}</h3>
+          <ul :key="product.id">
+            <li v-for="item in product.list" :key="item">
               <a :href="item.url">{{item.name}}</a>
               <span v-if="item.hot" class="hot-tag">HOT</span>
             </li>
@@ -15,12 +14,29 @@
         </template>
       </div>
       <div class="index-left-block lastest-news">
-          <h2>最新消息</h2>
-          <ul>
-              <li v-for="item in newsList">
-                  <a :href="item.url" class="new-item">{{ item.title }}</a>
-              </li>
-          </ul>
+        <h2>最新消息</h2>
+        <ul>
+          <li v-for="item in newsList" :key="item">
+            <a :href="item.url" class="new-item">{{ item.title }}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="index-right">
+      <div class="index-board-list">
+        <div
+          class="index-board-item"
+          v-for="(item, index) in boardList"
+          :class="[{'line-last' : index%2!==0}, 'index-board-'+item.id]"
+          :key="item.id">
+          <div class="index-board-item-inner">
+              <h2>{{ item.title }}</h2>
+              <p>{{ item.description }}</p>
+              <div class="index-board-button">
+                  <router-link class="button" :to="{path: 'detail/' + item.toKey}">立即购买</router-link>
+              </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -28,97 +44,98 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       boardList: [
         {
-          title: "开放产品",
-          description: "开放产品是一款开放产品",
-          id: "car",
-          toKey: "analysis",
+          title: '开放产品',
+          description: '开放产品是一款开放产品',
+          id: 'car',
+          toKey: 'analysis',
           saleout: false
         },
         {
-          title: "品牌营销",
-          description: "品牌营销帮助你的产品更好地找到定位",
-          id: "earth",
-          toKey: "count",
+          title: '品牌营销',
+          description: '品牌营销帮助你的产品更好地找到定位',
+          id: 'earth',
+          toKey: 'count',
           saleout: false
         },
         {
-          title: "使命必达",
-          description: "使命必达快速迭代永远保持最前端的速度",
-          id: "loud",
-          toKey: "forecast",
+          title: '使命必达',
+          description: '使命必达快速迭代永远保持最前端的速度',
+          id: 'loud',
+          toKey: 'forecast',
           saleout: true
         },
         {
-          title: "勇攀高峰",
-          description: "帮你勇闯高峰，到达事业的顶峰",
-          id: "hill",
-          toKey: "publish",
+          title: '勇攀高峰',
+          description: '帮你勇闯高峰，到达事业的顶峰',
+          id: 'hill',
+          toKey: 'publish',
           saleout: false
         }
       ],
       newsList: [
-          {
-            title: "baidu",
-            url: "http://www.baidu.com",              
-          },
-          {
-            title: "sina",
-            url: "http://www.sina.com",
-          },],
+        {
+          title: 'baidu',
+          url: 'http://www.baidu.com'
+        },
+        {
+          title: 'sina',
+          url: 'http://www.sina.com'
+        }
+      ],
       productList: {
         pc: {
-          title: "PC产品",
+          title: 'PC产品',
           list: [
             {
-              name: "数据统计",
-              url: "http://starcraft.com"
+              name: '数据统计',
+              url: 'http://starcraft.com'
             },
             {
-              name: "数据预测",
-              url: "http://warcraft.com"
+              name: '数据预测',
+              url: 'http://warcraft.com'
             },
             {
-              name: "流量分析",
-              url: "http://overwatch.com",
+              name: '流量分析',
+              url: 'http://overwatch.com',
               hot: true
             },
             {
-              name: "广告发布",
-              url: "http://hearstone.com"
+              name: '广告发布',
+              url: 'http://hearstone.com'
             }
           ]
         },
         app: {
-          title: "手机应用类",
+          title: '手机应用类',
           last: true,
           list: [
             {
-              name: "91助手",
-              url: "http://weixin.com"
+              name: '91助手',
+              url: 'http://weixin.com'
             },
             {
-              name: "产品助手",
-              url: "http://twitter.com",
+              name: '产品助手',
+              url: 'http://twitter.com',
               hot: true
             },
             {
-              name: "智能地图",
-              url: "http://maps.com"
+              name: '智能地图',
+              url: 'http://maps.com'
             },
             {
-              name: "团队语音",
-              url: "http://phone.com"
+              name: '团队语音',
+              url: 'http://phone.com'
             }
           ]
         }
       }
-    };
+    }
   }
-};
+}
 </script>
 
 <style scoped>
@@ -161,11 +178,18 @@ export default {
 .index-left-block li {
   padding: 5px;
 }
-/* .index-board-list {
+.index-board-list {
   overflow: hidden;
 }
 .index-board-item {
   float: left;
+  /**
+  设置了float属性的元素会根据设置的属性值向左或者向右浮动，
+  直到它的外边缘碰到包含框或另一个浮动框的边框为止。
+  设置了float属性的元素会从普通文档流中脱离，相当于不占据任何空间，
+  所以文档中普通流中的元素表现的就像浮动元素不存在一样，
+  因此，设置float属性的后会影响我们的页面布局。
+  具体说来就是：让block元素无视float元素，让inline元素像流水一样围绕着float元素实现浮动布局。*/
   width: 400px;
   background: #fff;
   box-shadow: 0 0 1px #ddd;
@@ -188,19 +212,19 @@ export default {
 }
 .index-board-hill .index-board-item-inner{
   background: url(../assets/images/4.png) no-repeat;
-} */
-/* .index-board-item h2 {
+}
+.index-board-item h2 {
   font-size: 18px;
   font-weight: bold;
   color: #000;
   margin-bottom: 15px;
-} */
-/* .line-last {
+}
+.line-last {
   margin-right: 0;
 }
 .index-board-button {
   margin-top: 20px;
-} */
+}
 .lastest-news {
   min-height: 512px;
 }
@@ -209,10 +233,10 @@ export default {
   color: #fff;
 }
 .new-item {
-  display: inline-block; 
+  display: inline-block;
   width: 230px;
   overflow: hidden;
   text-overflow: ellipsis; /* 当文本溢出包含元素时 clip ellipsis*/
-  white-space: nowrap; /* 段落中的文本不尽兴换行 */
+  white-space: nowrap; /* 段落中的文本不换行 */
 }
 </style>
