@@ -66,13 +66,14 @@ export default {
       setTimeout(() => {
         this.isShow = true
         this.nowIndex = index
+        this.$emit('onchange', 'testEmit')
       }, 20)
     },
     runInv () {
       // invId 引用是为了之后可以停止
       this.invId = setInterval(() => {
         this.goto(this.nextIndex)
-        console.log(this.nowIndex)
+        console.log('goto slide' + this.nowIndex)
       }, this.inv)
     },
     clearInv () {

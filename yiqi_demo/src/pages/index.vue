@@ -24,7 +24,7 @@
     </div>
     <div class="index-right">
       <!-- slideShow 在 html 中最好都转成 “-”， vue2.0 也支持大小写 -->
-      <slide-show :slides="slides" :inv="invTime"></slide-show>
+      <slide-show :slides="slides" :inv="invTime" @onchange="doSomethindOnSlideChanged"></slide-show>
       <div class="index-board-list">
         <div
           class="index-board-item"
@@ -164,6 +164,11 @@ export default {
           ]
         }
       }
+    }
+  },
+  methods: {
+    doSomethindOnSlideChanged: function (index) {
+      console.log('doSomethindOnSlideChanged ' + index)
     }
   }
 }
