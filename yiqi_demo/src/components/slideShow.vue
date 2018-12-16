@@ -3,7 +3,12 @@
     <!--每一个组件一定要有唯一根结点的-->
     <div class="slide-img">
       <a :href="slides[nowIndex].scr">
-        <img :src="slides[nowIndex].src">
+        <transition name="slide-trans">
+          <img v-if="isShow" :src="slides[nowIndex].src">
+        </transition>
+        <transition name="slide-trans-old">
+          <img v-if="!isShow" :src="slides[nowIndex].src">
+        </transition>
       </a>
     </div>
     <h2>{{ slides[nowIndex].title }}</h2>
@@ -20,12 +25,12 @@
 
 <script>
 export default {
-  name: "slideshow",
+  name: 'slideshow',
   props: {
     // 声明组件接受什么样的属性
     slides: {
       type: Array,
-      default: []
+      default: () => [] // es6 箭头语法
     },
     inv: {
       type: Number,
@@ -48,19 +53,24 @@ export default {
       }
     }
   },
-  data() {
+  data () {
     return {
-      msg: "slideshow",
-      nowIndex: 2
-    };
+      msg: 'slideshow',
+      nowIndex: 2,
+      isShow: true
+    }
   },
   methods: {
     goto (index) {
-      this.nowIndex = index
+      this.isShow = false
+      setTimeout(() => {
+        this.isShow = true
+        this.nowIndex = index
+      }, 20)
     },
     runInv () {
       // invId 引用是为了之后可以停止
-      this.invId = setInterval( () => {
+      this.invId = setInterval(() => {
         this.goto(this.nextIndex)
         console.log(this.nowIndex)
       }, this.inv)
@@ -69,24 +79,24 @@ export default {
       clearInterval(this.invId)
     }
   },
-  mounted() {
-    console.log(this.slides);
-    this.runInv();
+  mounted () {
+    console.log(this.slides)
+    this.runInv()
   }
-};
+}
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-/* .slide-trans-enter-active {
+.slide-trans-enter-active {
   transition: all 0.5s;
-} */
-/* .slide-trans-enter {
+}
+.slide-trans-enter {
   transform: translateX(900px);
-} */
-/* .slide-trans-old-leave-active {
+}
+.slide-trans-old-leave-active {
   transition: all 0.5s;
   transform: translateX(-900px);
-} */
+}
 .slide-show {
   position: relative;
   margin: 15px 15px 15px 0;
