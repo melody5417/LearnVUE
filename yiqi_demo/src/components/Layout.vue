@@ -41,19 +41,22 @@
 </template>
 
 <script>
-import Dialog from "../base/dialog";
+import Dialog from '../base/dialog'
+import LogForm from '../base/logForm'
+import RegForm from '../base/regForm'
 export default {
   name: "layout",
   components: {
-    MyDialog: Dialog
+    MyDialog: Dialog,
+    LogForm,
+    RegForm
   },
   data() {
     return {
-      msg: "layout",
       isShowAboutDialog: false,
       isShowLogDialog: false,
       isShowRegDialog: false,
-      username: ""
+      username: ''
     };
   },
   methods: {
@@ -79,7 +82,7 @@ export default {
 };
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style>
 /* http://meyerweb.com/eric/tools/css/reset/
    v2.0 | 20110126
    License: none (public domain)
