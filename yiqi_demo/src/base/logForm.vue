@@ -44,7 +44,7 @@ export default {
         status = false;
         errorText = "不包含@";
       } else {
-        stat = true;
+        status = true;
         errorText = "";
       }
       if (!this.userFlag) {

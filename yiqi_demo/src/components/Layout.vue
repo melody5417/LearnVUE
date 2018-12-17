@@ -59,6 +59,9 @@ export default {
     };
   },
   methods: {
+    quit() {
+      this.username = ""
+    },
     aboutClick() {
       this.isShowAboutDialog = true;
     },

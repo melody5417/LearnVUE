@@ -179,7 +179,7 @@ export default {
   },
   methods: {
     doSomethindOnSlideChanged: function(index) {
-      console.log("doSomethindOnSlideChanged " + index);
+      // console.log("doSomethindOnSlideChanged " + index);
     }
   }
 };

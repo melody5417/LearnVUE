@@ -73,7 +73,7 @@ export default {
       // invId 引用是为了之后可以停止
       this.invId = setInterval(() => {
         this.goto(this.nextIndex);
-        console.log("goto slide" + this.nowIndex);
+        // console.log("goto slide" + this.nowIndex);
       }, this.inv);
     },
     clearInv() {
