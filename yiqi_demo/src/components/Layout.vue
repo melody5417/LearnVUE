@@ -41,11 +41,10 @@
 </template>
 
 <script>
-import Dialog from '../base/dialog'
-import LogForm from '../base/logForm'
-import RegForm from '../base/regForm'
+import Dialog from "../base/dialog";
+import LogForm from "../base/logForm";
+import RegForm from "../base/regForm";
 export default {
-  name: "layout",
   components: {
     MyDialog: Dialog,
     LogForm,
@@ -56,7 +55,7 @@ export default {
       isShowAboutDialog: false,
       isShowLogDialog: false,
       isShowRegDialog: false,
-      username: ''
+      username: ""
     };
   },
   methods: {
@@ -70,7 +69,6 @@ export default {
       this.isShowRegDialog = true;
     },
     closeDialog(attr) {
-      console.log('layout close dialog')
       this[attr] = false;
     },
     onSuccessLog(data) {

@@ -30,13 +30,14 @@
           class="index-board-item"
           v-for="(item, index) in boardList"
           :class="[{'line-last' : index%2!==0}, 'index-board-'+item.id]"
-          :key="item.id">
+          :key="item.id"
+        >
           <div class="index-board-item-inner">
-              <h2>{{ item.title }}</h2>
-              <p>{{ item.description }}</p>
-              <div class="index-board-button">
-                  <router-link class="button" :to="{path: 'detail/' + item.toKey}">立即购买</router-link>
-              </div>
+            <h2>{{ item.title }}</h2>
+            <p>{{ item.description }}</p>
+            <div class="index-board-button">
+              <router-link class="button" :to="{path: 'detail/' + item.toKey}">立即购买</router-link>
+            </div>
           </div>
         </div>
       </div>
@@ -45,133 +46,133 @@
 </template>
 
 <script>
-import slideShow from '../components/slideShow'
+import slideShow from "../components/slideShow";
 export default {
   components: {
     slideShow
   },
-  data () {
+  data() {
     return {
       invTime: 2000,
       slides: [
         {
           // webpack js require
           // 通过js引入source需要用require进行解析
-          src: require('../assets/slideShow/pic1.jpg'),
-          title: 'xxx1',
-          href: 'detail/analysis'
+          src: require("../assets/slideShow/pic1.jpg"),
+          title: "xxx1",
+          href: "detail/analysis"
         },
         {
-          src: require('../assets/slideShow/pic2.jpg'),
-          title: 'xxx2',
-          href: 'detail/count'
+          src: require("../assets/slideShow/pic2.jpg"),
+          title: "xxx2",
+          href: "detail/count"
         },
         {
-          src: require('../assets/slideShow/pic3.jpg'),
-          title: 'xxx3',
-          href: 'http://xxx.xxx.com'
+          src: require("../assets/slideShow/pic3.jpg"),
+          title: "xxx3",
+          href: "http://xxx.xxx.com"
         },
         {
-          src: require('../assets/slideShow/pic4.jpg'),
-          title: 'xxx4',
-          href: 'detail/forecast'
+          src: require("../assets/slideShow/pic4.jpg"),
+          title: "xxx4",
+          href: "detail/forecast"
         }
       ],
       boardList: [
         {
-          title: '开放产品',
-          description: '开放产品是一款开放产品',
-          id: 'car',
-          toKey: 'analysis',
+          title: "开放产品",
+          description: "开放产品是一款开放产品",
+          id: "car",
+          toKey: "analysis",
           saleout: false
         },
         {
-          title: '品牌营销',
-          description: '品牌营销帮助你的产品更好地找到定位',
-          id: 'earth',
-          toKey: 'count',
+          title: "品牌营销",
+          description: "品牌营销帮助你的产品更好地找到定位",
+          id: "earth",
+          toKey: "count",
           saleout: false
         },
         {
-          title: '使命必达',
-          description: '使命必达快速迭代永远保持最前端的速度',
-          id: 'loud',
-          toKey: 'forecast',
+          title: "使命必达",
+          description: "使命必达快速迭代永远保持最前端的速度",
+          id: "loud",
+          toKey: "forecast",
           saleout: true
         },
         {
-          title: '勇攀高峰',
-          description: '帮你勇闯高峰，到达事业的顶峰',
-          id: 'hill',
-          toKey: 'publish',
+          title: "勇攀高峰",
+          description: "帮你勇闯高峰，到达事业的顶峰",
+          id: "hill",
+          toKey: "publish",
           saleout: false
         }
       ],
       newsList: [
         {
-          title: 'baidu',
-          url: 'http://www.baidu.com'
+          title: "baidu",
+          url: "http://www.baidu.com"
         },
         {
-          title: 'sina',
-          url: 'http://www.sina.com'
+          title: "sina",
+          url: "http://www.sina.com"
         }
       ],
       productList: {
         pc: {
-          title: 'PC产品',
+          title: "PC产品",
           list: [
             {
-              name: '数据统计',
-              url: 'http://starcraft.com'
+              name: "数据统计",
+              url: "http://starcraft.com"
             },
             {
-              name: '数据预测',
-              url: 'http://warcraft.com'
+              name: "数据预测",
+              url: "http://warcraft.com"
             },
             {
-              name: '流量分析',
-              url: 'http://overwatch.com',
+              name: "流量分析",
+              url: "http://overwatch.com",
               hot: true
             },
             {
-              name: '广告发布',
-              url: 'http://hearstone.com'
+              name: "广告发布",
+              url: "http://hearstone.com"
             }
           ]
         },
         app: {
-          title: '手机应用类',
+          title: "手机应用类",
           last: true,
           list: [
             {
-              name: '91助手',
-              url: 'http://weixin.com'
+              name: "91助手",
+              url: "http://weixin.com"
             },
             {
-              name: '产品助手',
-              url: 'http://twitter.com',
+              name: "产品助手",
+              url: "http://twitter.com",
               hot: true
             },
             {
-              name: '智能地图',
-              url: 'http://maps.com'
+              name: "智能地图",
+              url: "http://maps.com"
             },
             {
-              name: '团队语音',
-              url: 'http://phone.com'
+              name: "团队语音",
+              url: "http://phone.com"
             }
           ]
         }
       }
-    }
+    };
   },
   methods: {
-    doSomethindOnSlideChanged: function (index) {
-      console.log('doSomethindOnSlideChanged ' + index)
+    doSomethindOnSlideChanged: function(index) {
+      console.log("doSomethindOnSlideChanged " + index);
     }
   }
-}
+};
 </script>
 
 <style scoped>
@@ -237,16 +238,16 @@ export default {
   min-height: 125px;
   padding-left: 120px;
 }
-.index-board-car .index-board-item-inner{
+.index-board-car .index-board-item-inner {
   background: url(../assets/images/1.png) no-repeat;
 }
-.index-board-loud .index-board-item-inner{
+.index-board-loud .index-board-item-inner {
   background: url(../assets/images/2.png) no-repeat;
 }
-.index-board-earth .index-board-item-inner{
+.index-board-earth .index-board-item-inner {
   background: url(../assets/images/3.png) no-repeat;
 }
-.index-board-hill .index-board-item-inner{
+.index-board-hill .index-board-item-inner {
   background: url(../assets/images/4.png) no-repeat;
 }
 .index-board-item h2 {

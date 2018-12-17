@@ -25,7 +25,7 @@
 
 <script>
 export default {
-  name: 'slideshow',
+  name: "slideshow",
   props: {
     // 声明组件接受什么样的属性
     slides: {
@@ -38,53 +38,53 @@ export default {
     }
   },
   computed: {
-    prevIndex () {
+    prevIndex() {
       if (this.nowIndex === 0) {
-        return this.slides.length - 1
+        return this.slides.length - 1;
       } else {
-        return this.nowIndex - 1
+        return this.nowIndex - 1;
       }
     },
-    nextIndex () {
+    nextIndex() {
       if (this.nowIndex === this.slides.length - 1) {
-        return 0
+        return 0;
       } else {
-        return this.nowIndex + 1
+        return this.nowIndex + 1;
       }
     }
   },
-  data () {
+  data() {
     return {
-      msg: 'slideshow',
+      msg: "slideshow",
       nowIndex: 2,
       isShow: true
-    }
+    };
   },
   methods: {
-    goto (index) {
-      this.isShow = false
+    goto(index) {
+      this.isShow = false;
       setTimeout(() => {
-        this.isShow = true
-        this.nowIndex = index
-        this.$emit('onchange', 'testEmit')
-      }, 20)
+        this.isShow = true;
+        this.nowIndex = index;
+        this.$emit("onchange", "testEmit");
+      }, 20);
     },
-    runInv () {
+    runInv() {
       // invId 引用是为了之后可以停止
       this.invId = setInterval(() => {
-        this.goto(this.nextIndex)
-        console.log('goto slide' + this.nowIndex)
-      }, this.inv)
+        this.goto(this.nextIndex);
+        console.log("goto slide" + this.nowIndex);
+      }, this.inv);
     },
-    clearInv () {
-      clearInterval(this.invId)
+    clearInv() {
+      clearInterval(this.invId);
     }
   },
-  mounted () {
-    console.log(this.slides)
-    this.runInv()
+  mounted() {
+    console.log(this.slides);
+    this.runInv();
   }
-}
+};
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>

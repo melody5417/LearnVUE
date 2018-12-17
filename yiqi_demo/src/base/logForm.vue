@@ -37,7 +37,8 @@ export default {
   computed: {
     userErrors() {
       let errorText, status;
-      //   https://blog.csdn.net/qq_41261490/article/details/82966077
+      // https://blog.csdn.net/qq_41261490/article/details/82966077
+      // http://bubkoo.com/2014/03/19/understanding-the-flag-g-of-JavaScript's-regular-expressions/
       // 正则表达式
       if (!/@/g.test(this.usernameModel)) {
         status = false;
@@ -46,33 +47,32 @@ export default {
         stat = true;
         errorText = "";
       }
-    //   if (!this.userFlag) {
-    //       errorText = ''
-    //       this.userFlag = true
-    //   }
+      //   if (!this.userFlag) {
+      //       errorText = ''
+      //       this.userFlag = true
+      //   }
       return {
         status,
         errorText
       };
     },
     passwordErrors() {
-      let errorText, status
+      let errorText, status;
       if (!/^\w{1,6}$/g.test(this.passwordModel)) {
-        status = false
-        errorText = '密码不是1-6位'
-      }
-      else {
-        status = true
-        errorText = ''
+        status = false;
+        errorText = "密码不是1-6位";
+      } else {
+        status = true;
+        errorText = "";
       }
       if (!this.passwordFlag) {
-        errorText = ''
-        this.passwordFlag = true
+        errorText = "";
+        this.passwordFlag = true;
       }
       return {
         status,
         errorText
-      }
+      };
     }
   },
   methods: {
