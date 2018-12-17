@@ -3,8 +3,11 @@
 import Vue from 'vue'
 import router from './router'
 import layout from './components/layout'
+import VueResource from 'vue-resource'
 
 Vue.config.productionTip = false
+
+Vue.use(VueResource) // 全局使用this.$http
 
 /* eslint-disable no-new */
 new Vue({

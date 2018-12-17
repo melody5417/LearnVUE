@@ -6,14 +6,14 @@
         <div class="g-form-input">
           <input type="text" v-model="usernameModel" placeholder="请输入用户名">
         </div>
-        <!-- <span class="g-form-error">{{ userErrors.errorText }}</span> -->
+        <span class="g-form-error">{{ userErrors.errorText }}</span>
       </div>
       <div class="g-form-line">
         <span class="g-form-label">密码：</span>
         <div class="g-form-input">
           <input type="password" v-model="passwordModel" placeholder="请输入密码">
         </div>
-        <!-- <span class="g-form-error">{{ passwordErrors.errorText }}</span> -->
+        <span class="g-form-error">{{ passwordErrors.errorText }}</span>
       </div>
       <div class="g-form-line">
         <div class="g-form-btn">
@@ -47,10 +47,10 @@ export default {
         stat = true;
         errorText = "";
       }
-      //   if (!this.userFlag) {
-      //       errorText = ''
-      //       this.userFlag = true
-      //   }
+      if (!this.userFlag) {
+        errorText = "";
+        this.userFlag = true;
+      }
       return {
         status,
         errorText
@@ -81,14 +81,14 @@ export default {
         this.errorText = "部分选项未通过";
       } else {
         this.errorText = "";
-        // this.$http.get("api/login").then(
-        //   res => {
-        //     this.$emit("has-log", res.data);
-        //   },
-        //   error => {
-        //     console.log(error);
-        //   }
-        // )
+        this.$http.get("api/login").then(
+          res => {
+            this.$emit("has-log", res.data);
+          },
+          error => {
+            console.log(error);
+          }
+        )
       }
     }
   }

@@ -6,7 +6,7 @@
         <template v-for="product in productList">
           <h3 :key="product.id">{{ product.title }}</h3>
           <ul :key="product.id">
-            <li v-for="item in product.list" :key="item">
+            <li v-for="item in product.list">
               <a :href="item.url">{{item.name}}</a>
               <span v-if="item.hot" class="hot-tag">HOT</span>
             </li>
@@ -16,7 +16,7 @@
       <div class="index-left-block lastest-news">
         <h2>最新消息</h2>
         <ul>
-          <li v-for="item in newsList" :key="item">
+          <li v-for="item in newsList">
             <a :href="item.url" class="new-item">{{ item.title }}</a>
           </li>
         </ul>
@@ -50,6 +50,16 @@ import slideShow from "../components/slideShow";
 export default {
   components: {
     slideShow
+  },
+  created: function() {
+    this.$http.get("api/getNewsList").then(
+      res => {
+        this.newsList = res.data;
+      },
+      err => {
+        console.log(err);
+      }
+    );
   },
   data() {
     return {
