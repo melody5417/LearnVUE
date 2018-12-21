@@ -10,7 +10,7 @@
                     购买数量；
                 </div>
                 <div class="sales-board-line-right">
-                    <v-counter></v-counter>
+                    <v-counter @on-change="onParamChange('buyNum', $event)"></v-counter>
                 </div>
             </div>
             <div class="sales-board-line">
@@ -18,7 +18,7 @@
                     产品类型；
                 </div>
                 <div class="sales-board-line-right">
-                    <v-selection></v-selection>
+                    <v-selection :selections="buyTypes" @on-change="onParamChange('buyType', $event)"></v-selection>
                 </div>
             </div>
             <div class="sales-board-line">
@@ -80,8 +80,79 @@
 </template>
 
 <script>
+import VSelection from '../../base/selection'
+import VCounter from '../../base/counter'
 export default {
-    
+    components: {
+        VSelection,
+        VCounter
+    },
+    data () {
+        return {
+            buyNum: 0,
+            buyType: {},
+            versions: [],
+            period: {},
+            price: 0,
+            versionList: [
+                {
+                label: '客户版',
+                value: 0
+                },
+                {
+                label: '代理商版',
+                value: 1
+                },
+                {
+                label: '专家版',
+                value: 2
+                }
+            ],
+            periodList: [
+                {
+                label: '半年',
+                value: 0
+                },
+                {
+                label: '一年',
+                value: 1
+                },
+                {
+                label: '三年',
+                value: 2
+                }
+            ],
+            buyTypes: [
+                {
+                label: '入门版',
+                value: 0
+                },
+                {
+                label: '中级版',
+                value: 1
+                },
+                {
+                label: '高级版',
+                value: 2
+                }
+            ],
+            isShowPayDialog: false,
+            bankId: null,
+            orderId: null,
+            isShowCheckOrder: false,
+            isShowErrDialog: false
+        }
+    },
+    methods: {
+        onParamChange (attr, val) {
+            console.log(val)
+            this[attr] = val
+            this.getPrice()
+        },
+        getPrice () {
+
+        }
+    }
 }
 </script>
 
