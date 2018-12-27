@@ -26,7 +26,9 @@
                     有效时间；
                 </div>
                 <div class="sales-board-line-right">
-                    <v-chooser></v-chooser>
+                    <v-chooser
+                    :selections="periodList"
+                    @on-change="onParamChange('period', $event)"></v-chooser>
                 </div>
             </div>
             <div class="sales-board-line">
@@ -34,7 +36,9 @@
                     产品版本；
                 </div>
                 <div class="sales-board-line-right">
-                    <v-mul-chooser></v-mul-chooser>
+                    <v-mul-chooser
+                    :selections="versionList"
+                    @on-change="onParamChange('versions', $event)"></v-mul-chooser>
                 </div>
             </div>
             <div class="sales-board-line">
@@ -82,10 +86,15 @@
 <script>
 import VSelection from '../../base/selection'
 import VCounter from '../../base/counter'
+import VChooser from '../../base/chooser'
+import VMulChooser from '../../base/multiplyChooser'
+import _ from 'lodash'
 export default {
     components: {
         VSelection,
-        VCounter
+        VCounter,
+        VChooser,
+        VMulChooser
     },
     data () {
         return {
@@ -150,7 +159,20 @@ export default {
             this.getPrice()
         },
         getPrice () {
-
+            console.log('get price')
+            let buyVersionsArray = _.map(this.versions, (item) => {
+                return item.value
+            })
+            let reqParams = {
+                buyNumber: this.buyNum,
+                buyType: this.buyType.value,
+                period: this.period.value,
+                version: buyVersionsArray.join(',')
+            }
+            this.$http.post('/api/getPrice', reqParams)
+            .then((res) => {
+                this.price = res.data.amount
+            })
         }
     }
 }
