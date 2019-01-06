@@ -6,7 +6,7 @@
         <ul>
           <router-link
             v-for="item in products"
-            :to="{ path: item.path}"
+            :to="{ path: item.path }"
             tag="li"
             active-class="active"
           >{{ item.name }}</router-link>
