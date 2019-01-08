@@ -9,6 +9,7 @@
             :to="{ path: item.path }"
             tag="li"
             active-class="active"
+            :key="item.id"
           >{{ item.name }}</router-link>
         </ul>
       </div>

@@ -28,7 +28,7 @@
   "getPrice": {
     "buyNumber": 0,
     "period": 2,
-    "version": "2"
+    "version": "0,1,2"
   },
   "createOrder": {
     "orderId": "6djk979"
