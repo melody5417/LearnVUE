@@ -31,7 +31,9 @@
     "version": "0,1,2"
   },
   "createOrder": {
-    "orderId": "6djk979"
+    "buyNumber": 0,
+    "version": "",
+    "bankId": null
   },
   "getOrderList": {
     "list": [

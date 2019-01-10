@@ -102,6 +102,8 @@
                 </tr>
             </table>
             <h3 class="buy-dialog-title">请选择银行</h3>
+            <bank-chooser @on-change="onChangeBank"></bank-chooser>
+            <div class="button buy-dialog-btn" @click="confirmBuy">确认购买</div>
         </my-dialog>
     </div>    
 </template>
@@ -112,6 +114,7 @@ import VCounter from '../../base/counter'
 import VChooser from '../../base/chooser'
 import VMulChooser from '../../base/multiplyChooser'
 import Dialog from '../../base/dialog'
+import BankChooser from "../../components/BankChooser";
 import _ from 'lodash'
 export default {
     components: {
@@ -119,7 +122,8 @@ export default {
         VCounter,
         VChooser,
         VMulChooser,
-        MyDialog: Dialog
+        MyDialog: Dialog,
+        BankChooser,
     },
     data () {
         return {
@@ -204,6 +208,30 @@ export default {
         },
         hidePayDialog () {
             this.isShowPayDialog = false
+        },
+        onChangeBanks (bankObj) {
+            this.bankId = bankObj.id
+        },
+        confirmBuy() {
+            let buyVersionsArray = _.map(this.versions, (item) => {
+            return item.value
+        })
+        let reqParams = {
+            buyNumber: this.buyNum,
+            buyType: this.buyType.value,
+            period: this.period.value,
+            version: buyVersionsArray.join(','),
+            bankId: this.bankId
+        }
+        this.$http.post('/api/createOrder', reqParams)
+        .then((res) => {
+            this.orderId = res.data.orderId
+            this.isShowCheckOrder = true
+            this.isShowPayDialog = false
+        }, (err) => {
+            this.isShowBuyDialog = false
+            this.isShowErrDialog = true
+        }) 
         }
     }
 }
@@ -226,7 +254,7 @@ export default {
 .buy-dialog-table th {
     background: #4fc08d;
     color: #fff;
-    border: 1px solid #4fc08d;
+    border: 1px solid #4fc083;
 }
 </style>
 
